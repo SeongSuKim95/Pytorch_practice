@@ -90,8 +90,10 @@ for epoch in range(num_epochs):
 
         # forward
         scores = model(data)
+        print(scores.shape, targets.shape)
+
         loss = criterion(scores,targets)
-        
+
         # backward
 
         optimizer.zero_grad()
