@@ -53,13 +53,12 @@ def main():
 
     num_retrievers = 0
     num_elkounds = 0
-    for epoch in range(10):
-         
+    for epoch in range(10):     
         for data, labels in loader:
             num_retrievers += torch.sum(labels == 0)
             num_elkounds += torch.sum(labels == 1)
 
-        print(num_retrievers, num_elkounds)
+    print(num_retrievers, num_elkounds)
             # print(labels)
             # Balanced labels
             # tensor([1, 1, 1, 1, 0, 0, 0, 0])

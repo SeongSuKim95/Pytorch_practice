@@ -4,11 +4,11 @@ import torch.optim as optim
 from torch.utils.data.dataloader import DataLoader
 import torchvision.transforms as transforms
 import torchvision
-from torch.utils.data import Dataloader
-from Custom_datasets import CatsAndDogsDataset
+from torch.utils.data import DataLoader
+from Dataset import CatsAndDogsDataset
 
 # Set device
-device = torch.device('cuda' if torch.cude.is_available() else 'cpu')
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Hyperparams
 
@@ -20,8 +20,8 @@ num_epochs = 5
 
 # Load data
 
-dataset = CatsAndDogsDataset(csv_file = "/home/sungsu21/Project/data/dogs_cats_data/sampleSubmission.csv", root_dir = 'cats_dogs_resized', 
-                             transform = transforms.ToTensor())
+dataset = CatsAndDogsDataset( root_dir = "/home/sungsu21/Project/data/dogs_cats_data/train", annotation_file = "/home/sungsu21/Project/data/dogs_cats_data/train_csv.csv"
+                             ,transform = transforms.ToTensor())
 
 train_set, test_set = torch.utils.data.random_split(dataset,[20000,5000])
 

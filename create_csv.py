@@ -6,6 +6,7 @@ device = ("cuda" if torch.cuda.is_available() else "cpu")
 
 train_df = pd.DataFrame(columns=["img_path","label"])
 train_df["img_path"] = os.listdir("/home/sungsu21/Project/Pytorch_practice/practice_data")
+print(train_df)
 for idx, i in enumerate(os.listdir("/home/sungsu21/Project/Pytorch_practice/practice_data")):
     if "cat" in i:
         train_df["label"][idx] = 0

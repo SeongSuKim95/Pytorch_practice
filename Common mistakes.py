@@ -34,6 +34,25 @@ import torch
 x = torch.tensor([[1,2,3],[4,5,6]])
 
 print(x)
+#tensor([[1, 2, 3],
+#        [4, 5, 6]])
+print(x.view(3,2)) 
+#Just get elements sequentially and make shape
+#tensor([[1, 2],
+#        [3, 4],
+#        [5, 6]])
+print(x.permute(1,0)) ## Transpose
+#tensor([[1, 4],
+#        [2, 5],
+#        [3, 6]])
 
-print(x.view(3,2))
-print(x.permute(1,0))
+# 7. Using bad augmentation
+# --> Should not actually modify target
+
+# 8. Not shuffling the data
+
+# 9. Not Normalizing data
+
+# 10. Not Clipping Gradients( RNNS, GRUS, LSTM)
+# -> You might get gradient exploding problem
+# torch.nn.utils.clip_grad_norm(model.parameters(), max_norm =1)
