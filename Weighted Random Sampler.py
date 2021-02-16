@@ -11,7 +11,6 @@ from torch.utils.data import WeightedRandomSampler, DataLoader
 # Class weighting
 loss_fn = nn.CrossEntropyLoss(weight = torch.tensor([1,50])) # Weight X50 on elkhound 
 
-
 def get_loader(root_dir,batch_size):
 
     my_transforms = transforms.Compose(
@@ -26,6 +25,7 @@ def get_loader(root_dir,batch_size):
     ##class_weights = [1,50] --> Just relative weight difference 
     
     class_weights = []
+
     for root, subdir, files in os.walk(root_dir):
         if len(files) > 0:
             class_weights.append(1/len(files))
@@ -50,7 +50,6 @@ def main():
 
     loader = get_loader(root_dir = "Imbalance_dog_data", batch_size = 8)
     
-
     num_retrievers = 0
     num_elkounds = 0
     for epoch in range(10):     
@@ -62,11 +61,17 @@ def main():
             # print(labels)
             # Balanced labels
             # tensor([1, 1, 1, 1, 0, 0, 0, 0])
+
             # tensor([1, 0, 1, 0, 0, 0, 0, 1])
+
             # tensor([1, 0, 1, 1, 0, 1, 0, 0])
+
             # tensor([0, 0, 1, 1, 1, 0, 0, 0])
+
             # tensor([1, 1, 0, 1, 0, 0, 0, 0])
-            # tensor([0, 1, 0, 1, 1, 1, 1, 1])
+
+            # tensor([0, 1, 0, 1, 1, 1, 1, 1]) 
+
             # tensor([0, 0, 0])
 
 
