@@ -150,7 +150,7 @@ print(model)
 
 model.to(device)
 
-# Dataset
+# Data
 
 train_dataset = datasets.CIFAR10(root = '/home/sungsu21/Project/data',train = True, download = False, transform = transforms.ToTensor())
 train_loader = dataloader.DataLoader(train_dataset, batch_size = batch_size, shuffle = True)
@@ -177,6 +177,8 @@ for epoch in range(num_epochs):
 
         # forward
         scores = model(data)
+        print(scores.size())
+        print(target.size())
         loss = criterion(scores,targets)
         
         losses.append(loss.item())

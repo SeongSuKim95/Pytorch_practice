@@ -129,4 +129,4 @@ def Check_Accuracy(loader,model):
         model.train()
 
 Check_Accuracy(train_loader,model)
-Check_Accuracy(test_loader,model)
+Check_Accuracy(test_loader,model) 

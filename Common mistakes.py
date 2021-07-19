@@ -55,4 +55,4 @@ print(x.permute(1,0)) ## Transpose
 
 # 10. Not Clipping Gradients( RNNS, GRUS, LSTM)
 # -> You might get gradient exploding problem
-# torch.nn.utils.clip_grad_norm(model.parameters(), max_norm =1)
+# torch.nn.utils.clip_grad_norm(model.parameters(), max_norm =1) 
