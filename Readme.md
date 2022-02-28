@@ -3,7 +3,22 @@
 
 ## 1. Error message
 -------------------
+  - ImportError: cannot import name 'container_abcs' from 'torch._six'
+    - timm의 old version 문제에서 발생한다. 아래와 같이 container_abcs의 import name을 바꿔주면 해결됨
+      ```python
+      import collections.abc as container_abcs
+      ```
 
+## 2.Enviornment settings
+-------------------
+  - Conda enviornmnet 삭제
+    ```python
+    conda env remove -n "environment name"
+    ```
+  - RTX 3000 번대 부터는 Cudatoolkit version이 11.1 이상이어야 한다. Requirements를 깔기전에 cuda version에 맞는 torch와 torchvision을 깔아 주어야 문제가 안생긴다.
+    ```python
+    conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c conda-forge
+    ```
 
 ## 2. Concept
   - model.named_modules() [[LINK]](https://discuss.pytorch.org/t/how-to-access-to-a-layer-by-module-name/83797/8) : 자신을 포함한 모든 submodule을 반환
@@ -108,6 +123,39 @@
     ```python
     ret = model.apply(custom function) # custom function을 model 전체에 적용. apply가 적용된 model을 return
     ```
+ - 정규식
+   - re.compile : import re 를 사용하여 re로부터 직접 메서드를 호출하는것이 반복적으로 사용해야할 경우 부담이 되기 때문에, 컴파일을 미리 해 두고 이를 저장하는 것
+   - Example [[LINK]](https://greeksharifa.github.io/%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D(re)/2018/08/04/regex-usage-05-intermediate/)
+     ```python
+      print(re.search(r'\b\d+\b', 'Ryan 1 Tube 2 345'))
+      # 만약 이런 정규식을 반복적으로 써야한다면?
+      
+      with open('ryan.txt', 'r', encoding='utf-8') as f_in:
+        reObj = re.compile(r'\b\d+\b')
+        for line in f_in:
+            matchObj = reObj.search(line)
+            print(matchObj.group())
+      # 이런식으로 써주자!
+      # 무슨 차이인가?
+      # 지금까지는 re 모듈로부터 직접 match, search 등 메서드를 써 왔고, 인자는 기본적으로 1) 정규식 패턴과 2) 찾을 문자열이 있었다.
+      
+      # 컴파일을 미리 하는 버전은,
+
+      # re.compile 메서드로부터 reObj를 만든다.
+      # 인자는 기본적으로 1) 정규식 패턴 하나이다.
+      # reObj.match 혹은 search 등으로 문자열을 찾는다.
+      # 인자는 정규식 패턴은 이미 저장되어 있으므로 search 메서드에는 1) 찾을 문자열 하나만 주면 된다.
+      
+     ```
+  
+ - list 
+   - 반복문 안에서 list.append를 아래와 같이도 구현할 수 있다.
+     ```python
+     for _, pid, camid, trackid in data:  # _=directory, pid=pid, camid=camid
+        pids += [pid] # pid를 list에 append
+        cams += [camid]
+        tracks += [trackid]
+     ```
 
 
   
