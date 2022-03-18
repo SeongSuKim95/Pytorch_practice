@@ -11,15 +11,25 @@
 
 ## 2.Enviornment settings
 -------------------
-  - Conda enviornmnet 삭제
+  - Conda enviornment 삭제
     ```python
     conda env remove -n "environment name"
     ```
-  - RTX 3000 번대 부터는 Cudatoolkit version이 11.1 이상이어야 한다. Requirements를 깔기전에 cuda version에 맞는 torch와 torchvision을 깔아 주어야 문제가 안생긴다.
+  - Conda enviornment package list 뽑기
+    ```python
+    conda list --export > requirements.txt
+    ```
+  - RTX 3000 번대 부터는 Cudatoolkit version이 11.1 이상이어야 한다. Requirements를 깔기전에 cuda version에 맞는 torch와 torchvision을 깔아 주어야 문제가 안생긴다. nvcc --version으로 Cuda version을 확인하자.
+  - GeForce RTX 3090 (Cuda compilation tools, release 11.1, V11.1.105)
     ```python
     conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c conda-forge
     ```
-
+  - GeForce RTX 3060 (Cuda compilation tools, release 11.5, V11.5.50)
+    - 3060은 11.5.0 버전이 최신이지만 (22/03/18), Pytorch에서는 11.3까지 지원하고 있어서 11.3.1을 설치한다.
+    ```python
+    conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cudatoolkit=11.3 -c pytorch -c conda-forge
+    ```
+  - TORCH 와 CUDA version match check [[LINK]](https://pytorch.org/get-started/previous-versions/)
 ## 2. Concept
   - model.named_modules() [[LINK]](https://discuss.pytorch.org/t/how-to-access-to-a-layer-by-module-name/83797/8) : 자신을 포함한 모든 submodule을 반환
   - hook [[LINK]](https://velog.io/@bluegun/Pytorch%EB%A1%9C-%EB%94%A5%EB%9F%AC%EB%8B%9D-%EB%AA%A8%EB%8D%B8-%EA%B5%AC%EC%84%B1-%ED%95%99%EC%8A%B5-%EB%93%B1-%EC%A0%95%EB%A6%AC) [[LINK]](https://daebaq27.tistory.com/65) 
